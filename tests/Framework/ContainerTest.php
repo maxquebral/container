@@ -52,6 +52,13 @@ class ContainerTest extends TestCase
         $this->assertInstanceOf(ClassC::class, $res);
     }
 
+    public function testShouldMakeObjectWithoutConstructor()
+    {
+        $res = $this->container->make(ClassD::class);
+
+        $this->assertInstanceOf(ClassD::class, $res);
+    }
+
     public function testShouldMakeObjectUsingClosure()
     {
         $res = $this->container->make(function () {

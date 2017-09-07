@@ -65,7 +65,7 @@ class Container
 
 
         if (!$constructor = $reflection->getConstructor()) {
-            return null;
+            return $reflection->newInstance();
         }
 
         // get constructor parameters
