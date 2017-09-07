@@ -1,4 +1,7 @@
 {
+  "name": "maxque/container",
+  "description": "IoC Container",
+  "license": "MIT",
   "authors": [
     {
       "name": "Joey 'max' Quebral",
