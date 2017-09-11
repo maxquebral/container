@@ -27,16 +27,24 @@ class ContainerTest extends TestCase
         $this->container = new Container();
     }
 
-    public function testShouldBindObjectAndGetInstanceFromTheContainer()
+    /**
+     * @test
+     * @group bind
+    */
+    public function ShouldBindObjectAndGetInstanceFromTheContainer()
     {
-        $this->container->bind(InterfaceA::class, ClassA::class);
+        $object = $this->container->bind(InterfaceA::class, ClassA::class);
+        $this->assertInstanceOf(ClassA::class, $object);
 
         $classA = $this->container->getInstance(InterfaceA::class);
-
         $this->assertInstanceOf(ClassA::class, $classA);
     }
 
-    public function testShouldBindObjectUsingAClosure()
+    /**
+     * @test
+     * @group bind
+     */
+    public function ShouldBindObjectUsingAClosure()
     {
         $classD = $this->container->bind('test', function () {
             return new ClassD();
@@ -45,21 +53,33 @@ class ContainerTest extends TestCase
         $this->assertInstanceOf(ClassD::class, $classD);
     }
 
-    public function testShouldMakeObject()
+    /**
+     * @test
+     * @group make
+     */
+    public function ShouldMakeObject()
     {
         $res = $this->container->make(ClassC::class);
 
         $this->assertInstanceOf(ClassC::class, $res);
     }
 
-    public function testShouldMakeObjectWithoutConstructor()
+    /**
+     * @test
+     * @group make
+     */
+    public function ShouldMakeObjectWithoutConstructor()
     {
         $res = $this->container->make(ClassD::class);
 
         $this->assertInstanceOf(ClassD::class, $res);
     }
 
-    public function testShouldMakeObjectUsingClosure()
+    /**
+     * @test
+     * @group make
+     */
+    public function ShouldMakeObjectUsingClosure()
     {
         $res = $this->container->make(function () {
             return ClassC::class;
