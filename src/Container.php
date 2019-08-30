@@ -1,15 +1,13 @@
 <?php
-/**
- * Author: MaxQuebral
- * Date: 9/4/17
- * Project: Container
- * Filename: Container.php
- */
+declare(strict_types=1);
 
-namespace MaxQuebral\Framework;
+namespace MaxQuebral\Container;
 
 class Container
 {
+    /**
+     * @var mixed[]
+     */
     protected $instances = [];
 
     /**
@@ -17,9 +15,10 @@ class Container
      *
      * @param $abstract
      * @param $concrete
+     *
      * @return mixed|null|object
      */
-    public function bind($abstract, $concrete)
+    public function bind($abstract, $concrete): object
     {
         // check if already in the array of instances
         if ($this->getInstance($abstract)) {
@@ -53,7 +52,10 @@ class Container
      * Make the object and all its dependencies
      *
      * @param $class
+     *
      * @return null|object
+     *
+     * @throws \ReflectionException
      */
     public function make($class)
     {
@@ -63,28 +65,29 @@ class Container
             $reflection = new \ReflectionClass($class);
         }
 
-
         if (!$constructor = $reflection->getConstructor()) {
             return $reflection->newInstance();
         }
 
-        // get constructor parameters
+        // Get constructor parameters
         $params = $constructor->getParameters();
 
         $dependencies = [];
         foreach ($params as $param) {
-            // check if parameter is a class and instantiable
-            if ($param->getClass() AND $param->getClass()->isInstantiable()) {
-                // get the class
+            // Check if parameter is a class and instantiable
+            if ($param->getClass() && $param->getClass()->isInstantiable()) {
+                // Get the class
                 $class = $param->getClass();
 
                 if ($class->getConstructor()) {
-                    // if class has a constructor, recurse and get dependencies
+                    // If class has a constructor, recurse and get dependencies
                     $dep = $this->make($class->getName());
                     $dependencies[] = $dep;
-                } else {
-                    $dependencies[] = $param->getClass()->newInstance();
+
+                    continue;
                 }
+
+                $dependencies[] = $param->getClass()->newInstance();
 
                 continue;
             }

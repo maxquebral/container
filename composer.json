@@ -1,16 +1,16 @@
 {
-  "name": "maxque/container",
-  "description": "IoC Container",
+  "name": "maxquebral/container",
+  "description": "Simple service container",
   "license": "MIT",
   "authors": [
     {
-      "name": "Joey 'max' Quebral",
-      "email": "jaquebral@gmail.com"
+      "name": "Max Quebral",
+      "email": "maxquebral@gmail.com"
     }
   ],
   "autoload": {
     "psr-4": {
-      "MaxQuebral\\": "src/"
+      "MaxQuebral\\Container\\": "src/"
     }
   },
   "autoload-dev": {
@@ -19,11 +19,11 @@
     }
   },
   "require": {
-    
+    "php": ">=7.2"
   },
   "require-dev": {
-    "symfony/var-dumper": "^3.3",
-    "mockery/mockery": "0.9.*",
-    "phpunit/phpunit": "~5.7"
+    "brianium/paratest": "^2.2",
+    "mockery/mockery": "~1.0",
+    "phpunit/phpunit": "~7.0"
   }
 }
