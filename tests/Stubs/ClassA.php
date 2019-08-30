@@ -6,7 +6,7 @@
  * Filename: ClassA.php
  */
 
-namespace Tests\Mocks;
+namespace Tests\Stubs;
 
 class ClassA implements InterfaceA
 {

@@ -6,7 +6,7 @@
  * Filename: ClassC.php
  */
 
-namespace Tests\Mocks;
+namespace Tests\Stubs;
 
 class ClassC
 {
@@ -27,6 +27,14 @@ class ClassC
      */
     private $skills;
 
+    /**
+     * ClassC constructor.
+     *
+     * @param \Tests\Stubs\ClassA $classA
+     * @param \Tests\Stubs\ClassB $classB
+     * @param $name
+     * @param array $skills
+     */
     public function __construct(ClassA $classA, ClassB $classB, $name, array $skills = [1, 2, 3])
     {
         $this->classA = $classA;

@@ -6,7 +6,7 @@
  * Filename: ClassB.php
  */
 
-namespace Tests\Mocks;
+namespace Tests\Stubs;
 
 class ClassB
 {
